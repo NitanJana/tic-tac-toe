@@ -1,0 +1,34 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --board-dimension: 400px;
+  --outline-overlap: 2px;
+  --outline-color: rgb(39, 153, 168);
+  --cell-background-color: rgb(255, 255, 255);
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  width: var(--board-dimension);
+  height: var(--board-dimension);
+  display: grid;
+  grid-template: repeat(3,1fr) / repeat(3,1fr);
+  gap: var(--outline-overlap);
+  background-color: var(--outline-color);
+}
+
+.cell {
+  background-color: var(--cell-background-color);
+}
