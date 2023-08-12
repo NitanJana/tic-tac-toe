@@ -1,5 +1,5 @@
 const GameBoard = (() => {
-  const _board = ["X", "X", "X", "X", "X", "X", "X", "X", "X"];
+  const _board = ["x", "o", "x", "x", "o", "x", "o", "x", "o"];
 
   const getCell = (index) => {
     return _board[index];
