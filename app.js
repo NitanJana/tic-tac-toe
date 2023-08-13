@@ -24,6 +24,7 @@ const Player = (mark) => {
 
 const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
+  const message = document.querySelector(".message");
 
 
 
@@ -41,6 +42,16 @@ const DisplayController = (() => {
     });
   });
 
+  const setResult = (result) => {
+    setMessage(`Player ${result} has won`);
+  };
+
+  const setMessage = (text) => {
+    message.textContent = text;
+  };
+
+
+  return { setResult,setMessage };
   
 })();
 
@@ -66,7 +77,7 @@ const GameController = (() => {
     GameBoard.setCell(cellIndex, getCurrentPlayerMark());
     if (checkWinner(parseInt(cellIndex))) {
       isGameOver = true;
-      console.log(`${getCurrentPlayerMark()} has won`);
+      DisplayController.setResult(getCurrentPlayerMark().toUpperCase());
     }
     round++;
   };
