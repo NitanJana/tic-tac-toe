@@ -100,6 +100,7 @@ const GameController = (() => {
     }
     
     round++;
+    DisplayController.setMessage(`${getCurrentPlayerMark().toUpperCase()}'s turn`)
   };
   
 
