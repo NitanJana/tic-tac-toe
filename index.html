@@ -8,6 +8,14 @@
   <script src="./app.js" defer></script>
 </head>
 <body>
+  <dialog class="modal">
+    <div class="result-container">
+      <div class="result-header"></div>
+    <div class="button-container">
+    <button class="restart-btn" id="restart-btn-modal">Restart</button>
+  </div>
+    </div>
+  </dialog>
   <div class="main">
     <div class="message">Let's Play</div>
     <div class="board">
@@ -22,7 +30,7 @@
     <div class="cell" data-index="8"></div>
   </div>
   <div class="button-container">
-    <button id="restart-btn">Restart</button>
+    <button class="restart-btn" id="restart-main">Restart</button>
   </div>
   </div>
 </body>

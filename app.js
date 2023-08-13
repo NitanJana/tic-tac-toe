@@ -30,7 +30,10 @@ const Player = (mark) => {
 const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
   const message = document.querySelector(".message");
-  const restart = document.querySelector("#restart-btn");
+  const modal = document.querySelector(".modal");
+  const resultHeader = document.querySelector(".result-header");
+  const restartMain = document.querySelector("#restart-main");
+  const restartModal = document.querySelector("#restart-btn-modal");
   
   cells.forEach(cell => {
     cell.addEventListener('click', (e) => {
@@ -40,9 +43,17 @@ const DisplayController = (() => {
     });
   });
 
-  restart.addEventListener('click', () => {
+  restartMain.addEventListener('click', () => {
     GameBoard.reset();
     GameController.reset();
+    updateBoard();
+    DisplayController.setMessage(`Let's Play`);
+  });
+
+  restartModal.addEventListener('click', () => {
+    GameBoard.reset();
+    GameController.reset();
+    modal.close();
     updateBoard();
     DisplayController.setMessage(`Let's Play`);
   });
@@ -53,12 +64,13 @@ const DisplayController = (() => {
     }
   };
 
-  const setResult = (result) => {
-    if (result === 'Draw') {
-      setMessage("Draw!")
+  const setResult = (text) => {
+    if (text === 'Draw') {
+      resultHeader.textContent = text;
     } else {
-      setMessage(`Player ${result} has won`);
+      resultHeader.textContent = `Player ${text.toUpperCase()} has won`;
     }
+    modal.showModal();
   };
 
   const setMessage = (text) => {
@@ -91,8 +103,8 @@ const GameController = (() => {
   const playRound = (cellIndex) => {
     GameBoard.setCell(cellIndex, getCurrentPlayerMark());
     if (round === 9) {
-      DisplayController.setResult('Draw');
       isGameOver = true;
+      DisplayController.setResult('Draw');
     }
     if (checkWinner(parseInt(cellIndex))) {
       isGameOver = true;
@@ -100,7 +112,7 @@ const GameController = (() => {
     }
     
     round++;
-    DisplayController.setMessage(`${getCurrentPlayerMark().toUpperCase()}'s turn`)
+    DisplayController.setMessage(`Player ${getCurrentPlayerMark().toUpperCase()}'s turn`)
   };
   
 
