@@ -12,22 +12,30 @@
 :root {
   --board-dimension: 350px;
   --outline-overlap: 2px;
-  --outline-color: rgb(39, 153, 168);
-  --cell-background-color: rgb(255, 255, 255);
+  --primary-clr: #0d9488;
+  --white-clr: #ffffff;
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Poppins', sans-serif;
 }
 
-/* .main {
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
   padding: 1rem; 
-  border: 1px solid black;
-} */
+}
+
+.message {
+  font-size: 3rem;
+  color: var(--primary-clr);
+}
 
 .board {
   width: var(--board-dimension);
@@ -35,14 +43,24 @@ body {
   display: grid;
   grid-template: repeat(3,1fr) / repeat(3,1fr);
   gap: var(--outline-overlap);
-  background-color: var(--outline-color);
+  background-color: var(--primary-clr);
 }
 
 .cell {
-  background-color: var(--cell-background-color);
+  background-color: var(--white-clr);
   font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(45, 151, 151);
+}
+
+#restart-btn{
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 5rem;
+  background-color: var(--primary-clr);
+  color: var(--white-clr);
 }
