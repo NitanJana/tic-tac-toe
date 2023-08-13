@@ -47,20 +47,43 @@ const DisplayController = (() => {
 const GameController = (() => {
   const player1 = Player('x');
   const player2 = Player('o');
-
+  
   let round = 1;
-
-
-
+  
+  const winCombos = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ];
+  
   const playRound = (cellIndex) => {
     GameBoard.setCell(cellIndex, getCurrentPlayerMark());
+    if (checkWinner(parseInt(cellIndex))) {
+      console.log(`${getCurrentPlayerMark()} has won`);
+    }
     round++;
   };
+  
 
+  const checkWinner = (cellIndex) => {
+    return winCombos
+      .filter((combo) => combo.includes(cellIndex))
+      .some((possibleCombo) =>
+        possibleCombo.every(
+          (index) => GameBoard.getCell(index) === getCurrentPlayerMark()
+        )
+      );
+  };
+  
+  
   const getCurrentPlayerMark = () => {
     return round % 2 ? player1.getMark() : player2.getMark();
   };
-
 
 
   return { playRound };

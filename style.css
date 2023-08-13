@@ -10,7 +10,7 @@
 }
 
 :root {
-  --board-dimension: 400px;
+  --board-dimension: 350px;
   --outline-overlap: 2px;
   --outline-color: rgb(39, 153, 168);
   --cell-background-color: rgb(255, 255, 255);
@@ -23,6 +23,11 @@ body {
   align-items: center;
   font-family: 'Poppins', sans-serif;
 }
+
+/* .main {
+  padding: 1rem; 
+  border: 1px solid black;
+} */
 
 .board {
   width: var(--board-dimension);
