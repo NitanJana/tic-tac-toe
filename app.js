@@ -1,7 +1,7 @@
 const GameBoard = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
-  
+
   const getCell = (index) => {
     return board[index];
   };
@@ -35,6 +35,7 @@ const DisplayController = (() => {
 
   cells.forEach(cell => {
     cell.addEventListener('click', (e) => {
+      if (e.target.textContent !== "") return;
       GameController.playRound(e.target.dataset.index)
       updateBoard();
     });
