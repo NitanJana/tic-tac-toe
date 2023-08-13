@@ -10,9 +10,14 @@ const GameBoard = (() => {
     board[index] = mark;
   };
 
+  const reset = () => {
+    for (let i = 0; i < board.length; i++) {
+      board[i] = "";
+      
+    }
+  }
 
-
-  return { getCell,setCell };
+  return { getCell,setCell,reset };
 
 })();
 
@@ -25,15 +30,8 @@ const Player = (mark) => {
 const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
   const message = document.querySelector(".message");
-
-
-
-  const updateBoard = () => {
-    for (let i = 0; i < cells.length; i++){
-      cells[i].textContent = GameBoard.getCell(i);
-    }
-  };
-
+  const restart = document.querySelector("#restart-btn");
+  
   cells.forEach(cell => {
     cell.addEventListener('click', (e) => {
       if (GameController.getIsGameOver() || e.target.textContent !== "") return;
@@ -41,6 +39,19 @@ const DisplayController = (() => {
       updateBoard();
     });
   });
+
+  restart.addEventListener('click', () => {
+    GameBoard.reset();
+    GameController.reset();
+    updateBoard();
+    DisplayController.setMessage(`Let's Play`);
+  });
+  
+  const updateBoard = () => {
+    for (let i = 0; i < cells.length; i++){
+      cells[i].textContent = GameBoard.getCell(i);
+    }
+  };
 
   const setResult = (result) => {
     if (result === 'Draw') {
@@ -111,7 +122,11 @@ const GameController = (() => {
     return isGameOver;
   }
 
+  const reset = () => {
+    round = 1;
+    isGameOver = false;
+  };
 
-  return { playRound,getIsGameOver };
+  return { playRound,getIsGameOver,reset };
 
 })();
