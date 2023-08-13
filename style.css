@@ -13,6 +13,7 @@
   --board-dimension: 350px;
   --outline-overlap: 2px;
   --primary-clr: #0d9488;
+  --mark-clr: #2d9797;
   --white-clr: #ffffff;
 }
 
@@ -54,7 +55,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(45, 151, 151);
+  color: var(--mark-clr);
 }
 
 .restart-btn{
@@ -100,10 +101,13 @@ body {
   font-size: 1rem;
   display: flex;
   align-items: center;
+  font-weight: 500;
+  color: var(--primary-clr);
 }
 
 .footer-logo {
   margin-left: 10px;
   height: 30px;
   aspect-ratio: 1;
+  filter: invert(32%) sepia(95%) saturate(1786%) hue-rotate(154deg) brightness(91%) contrast(78%);
 }
