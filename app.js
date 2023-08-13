@@ -1,11 +1,17 @@
 const GameBoard = (() => {
-  const _board = ["x", "o", "x", "x", "o", "x", "o", "x", "o"];
+  const board = ["", "", "", "", "", "", "", "", ""];
 
   const getCell = (index) => {
-    return _board[index];
+    return board[index];
   };
 
-  return { getCell };
+  const setCell = (index,mark) => {
+    board[index] = mark;
+  };
+
+
+
+  return { getCell,setCell };
 
 })();
 
@@ -25,6 +31,15 @@ const DisplayController = (() => {
       cells[i].textContent = GameBoard.getCell(i);
     }
   };
+
+  cells.forEach(cell => {
+    cell.addEventListener('click', (e) => {
+      GameBoard.setCell(e.target.dataset.index, 'x');
+      updateBoard();
+    });
+  });
+
+  
 
   return { updateBoard };
 })();
