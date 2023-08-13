@@ -43,7 +43,11 @@ const DisplayController = (() => {
   });
 
   const setResult = (result) => {
-    setMessage(`Player ${result} has won`);
+    if (result === 'Draw') {
+      setMessage("Draw!")
+    } else {
+      setMessage(`Player ${result} has won`);
+    }
   };
 
   const setMessage = (text) => {
@@ -75,10 +79,15 @@ const GameController = (() => {
   
   const playRound = (cellIndex) => {
     GameBoard.setCell(cellIndex, getCurrentPlayerMark());
+    if (round === 9) {
+      DisplayController.setResult('Draw');
+      isGameOver = true;
+    }
     if (checkWinner(parseInt(cellIndex))) {
       isGameOver = true;
       DisplayController.setResult(getCurrentPlayerMark().toUpperCase());
     }
+    
     round++;
   };
   
