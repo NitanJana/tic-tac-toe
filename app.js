@@ -35,7 +35,7 @@ const DisplayController = (() => {
 
   cells.forEach(cell => {
     cell.addEventListener('click', (e) => {
-      if (e.target.textContent !== "") return;
+      if (GameController.getIsGameOver() || e.target.textContent !== "") return;
       GameController.playRound(e.target.dataset.index)
       updateBoard();
     });
@@ -49,6 +49,7 @@ const GameController = (() => {
   const player2 = Player('o');
   
   let round = 1;
+  let isGameOver = false;
   
   const winCombos = [
     [0,1,2],
@@ -64,6 +65,7 @@ const GameController = (() => {
   const playRound = (cellIndex) => {
     GameBoard.setCell(cellIndex, getCurrentPlayerMark());
     if (checkWinner(parseInt(cellIndex))) {
+      isGameOver = true;
       console.log(`${getCurrentPlayerMark()} has won`);
     }
     round++;
@@ -85,7 +87,11 @@ const GameController = (() => {
     return round % 2 ? player1.getMark() : player2.getMark();
   };
 
+  const getIsGameOver = () => {
+    return isGameOver;
+  }
 
-  return { playRound };
+
+  return { playRound,getIsGameOver };
 
 })();
