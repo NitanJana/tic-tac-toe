@@ -1,6 +1,7 @@
 const GameBoard = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
+  
   const getCell = (index) => {
     return board[index];
   };
@@ -16,8 +17,6 @@ const GameBoard = (() => {
 })();
 
 const Player = (mark) => {
-  this.mark = mark;
-
   const getMark = () => mark;
 
   return { getMark };
@@ -25,6 +24,8 @@ const Player = (mark) => {
 
 const DisplayController = (() => {
   const cells = document.querySelectorAll(".cell");
+
+
 
   const updateBoard = () => {
     for (let i = 0; i < cells.length; i++){
@@ -34,14 +35,33 @@ const DisplayController = (() => {
 
   cells.forEach(cell => {
     cell.addEventListener('click', (e) => {
-      GameBoard.setCell(e.target.dataset.index, 'x');
+      GameController.playRound(e.target.dataset.index)
       updateBoard();
     });
   });
 
   
-
-  return { updateBoard };
 })();
 
-DisplayController.updateBoard();
+const GameController = (() => {
+  const player1 = Player('x');
+  const player2 = Player('o');
+
+  let round = 1;
+
+
+
+  const playRound = (cellIndex) => {
+    GameBoard.setCell(cellIndex, getCurrentPlayerMark());
+    round++;
+  };
+
+  const getCurrentPlayerMark = () => {
+    return round % 2 ? player1.getMark() : player2.getMark();
+  };
+
+
+
+  return { playRound };
+
+})();
